@@ -12,6 +12,7 @@ html {
 body {
     background: #FDFDFF;
     background: linear-gradient(140deg, rgba(253, 253, 255, 1) 4%, rgba(204, 204, 255, 1) 100%);
+    background-attachment: fixed;
     position: relative;
 }
 
