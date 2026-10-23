@@ -15,14 +15,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/style.css">
     <style>
-
         .iframe-preview {
             width: 100%;
-            height: 300px;
+            height: 270px;
             overflow: hidden;
             position: relative;
-            display: flex;
-            justify-content: center;
+            border-radius: 12px;
+            background: #eeeefa;
         }
 
         .iframe-preview iframe {
@@ -33,6 +32,15 @@
             top: -45px;
             left: 50%;
             transform: translateX(-50%);
+            transform-origin: top center;
+        }
+
+        .fruit-preview iframe {
+            width: 900px;
+            height: 900px;
+            transform: translateX(-50%) scale(0.67);
+            transform-origin: top center;
+            top: -10px;
         }
 
         .card {
@@ -88,8 +96,8 @@
                         <p class="card-text my-3">A bento layout gallery of the Straw Hat Pirates from an anime series
                             One
                             Piece.</p>
-                        <a href="https://andreimarnilego.github.io/Web-Dev/Activity%201/index.html"
-                            class="btn card-btn" target="_blank">View Project</a>
+                        <a href="https://andreimarnilego.github.io/Web-Dev/Activity%201/index.html" class="btn card-btn"
+                            target="_blank">View Project</a>
                     </div>
                 </div>
             </div>
@@ -97,16 +105,14 @@
             <div class="col-4">
                 <div class="card shadow rounded-5 p-2" style="max-width: 500px; height: 100%;">
                     <div class="card-body">
-                        <div class="iframe-preview">
+                        <div class="iframe-preview fruit-preview">
                             <iframe src="https://andreimarnilego.github.io/Web-Dev/Activity%202/index.html"
                                 scrolling="no"></iframe>
                         </div>
-                        <div class="h3 mt-5 fw-bold">Activity 1</div>
-                        <p class="card-text my-3">A bento layout gallery of the Straw Hat Pirates from an anime series
-                            One
-                            Piece.</p>
-                        <a href="https://andreimarnilego.github.io/Web-Dev/Activity%202/index.html"
-                            class="btn card-btn" target="_blank">View Project</a>
+                        <div class="h3 mt-5 fw-bold">Activity 2</div>
+                        <p class="card-text my-3">My Favorite Devil Fruits in One Piece. Implemented with JSON data.</p>
+                        <a href="https://andreimarnilego.github.io/Web-Dev/Activity%202/index.html" class="btn card-btn"
+                            target="_blank">View Project</a>
                     </div>
                 </div>
             </div>
