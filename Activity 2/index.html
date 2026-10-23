@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Activity 2</title>
+    <link rel="icon" href="../assets/img/Logo.svg" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-B/GM4XqrwHnWXNOWMbloTmrYXZg10cakYGmpfsR/bbzQ6JAJI4ihuyADKLnBgrCe" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<style>
+    .card {
+        background: #eeeefa;
+        border: none;
+        color: #18212f;
+        font-family: 'Inter';
+    }
+
+</style>
+
+<body>
+    <div class="h2 text-center fw-bold my-5" style="color: #18212f; font-family: 'Inter';">My Favorite Devil Fruits</div>
+    <div class="container">
+        <div class="row" id="parent">
+        </div>
+    </div>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-1a/pXj49ZQ1aHEmrJ+gMw1otqoVsYwlEnlD8mIfY2TV03r20Y0CN7uqx1tQogjPL"
+        crossorigin="anonymous"></script>
+    <script>
+        const devilFruit = [
+            {
+                top: "top 1",
+                name: "Hito Hito no Mi, Model: Nika",
+                desc: "A Mythical Zoan-type Devil Fruit that enables the user to get the powers of the Sun God Nika and it gives the user a rubber like body. Its powers are limited by the user's imagination.",
+                img: "assets/img/gum.jpg"
+            },
+            {
+                top: "top 2",
+                name: "Ope Ope no Mi",
+                desc: "A Paramecia-type Devil Fruit that grants the power to create a spherical domain, inside of which the user can freely rearrange, take apart, and 'surgically' remodel anything and anyone, including themself, making the user a Free Modification Human.",
+                img: "assets/img/control.jpg"
+            },
+            {
+                top: "top 3",
+                name: "Tori Tori no Mi, Model: Phoenix",
+                desc: "A Mythical Zoan-type Devil Fruit that grants the power to transform into a phoenix and half-phoenix hybrid at will, as well as self-regenerate (and heal others) using blue phoenix flames.",
+                img: "assets/img/phoenix.jpg"
+            },
+            {
+                top: "top 4",
+                name: "Pika Pika no Mi",
+                desc: "A Logia-type Devil Fruit that allows the user to create, control, and transform into light at will, turning the user into a Light Human. It enables the user to move at the speed of light and transport themself by means of reflection.",
+                img: "assets/img/light.jpg"
+            },
+            {
+                top: "top 5",
+                name: "Uo Uo no Mi, Model: Seiryu",
+                desc: "a Mythical Zoan-type Devil Fruit that allows its user to transform into a hybrid and full Azure Dragon at will. Belonging to the 'strongest class of Devil Fruit'.",
+                img: "assets/img/dragon.jpg"
+            },
+            {
+                top: "top 6",
+                name: "Yami Yami no Mi",
+                desc: "A Logia-type Devil Fruit that allows the user to create, control, and transform into darkness at will, making the user a Darkness Human.",
+                img: "assets/img/dark.jpg"
+            },
+        ]
+
+        var parent = document.getElementById("parent");
+
+            for (var i = 0; i < devilFruit.length; i++) {
+                parent.innerHTML += `
+            <div class="col-4 p-5">
+                <div class="card p-3 shadow" style="width: 100%; height: 100%;">
+                    <img src="${devilFruit[i].img}" style="object-fit: cover;">
+                    <div class="h4 card-title fw-bold p-3 mt-5">${devilFruit[i].name}</div>
+                    <div class="card-text p-3 my-2">
+                        ${devilFruit[i].desc}
+                    </div>
+                </div>
+            </div>`;
+            }
+    </script>
+</body>
+
+</html>
