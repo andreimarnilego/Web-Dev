@@ -30,6 +30,38 @@
         box-shadow: 0 12px 30px rgba(57, 64, 189, 0.6),
             0 0 15px rgba(15, 177, 246, 0.15);
     }
+
+    .card-btn {
+        border-radius: 999px;
+        padding: 0.95rem 1.9rem;
+        max-width: 150px;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+        background: linear-gradient(135deg, #4B6BF2 0%, #6D8DFF 100%);
+        color: #fff;
+        border: none;
+        box-shadow: 0 18px 36px rgba(75, 107, 242, 0.24);
+        transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .card-btn:hover,
+    .card-btn:focus {
+        transform: translateY(-2px);
+        box-shadow: 0 22px 44px rgba(75, 107, 242, 0.28);
+        background: linear-gradient(135deg, #3458E3 0%, #657CFF 100%);
+    }
+
+    .badge-bounty {
+        background: linear-gradient(135deg, #af7002 0%, #ce9b43 100%);
+        color: #fff;
+        font-weight: 600;
+    }
+
+    .badge-role {
+        background: linear-gradient(135deg, #4B6BF2 0%, #6D8DFF 100%);
+        color: #fff;
+        font-weight: 600;
+    }
 </style>
 
 <body>
@@ -48,53 +80,123 @@
                 top: "top 1",
                 name: "Hito Hito no Mi, Model: Nika",
                 desc: "A Mythical Zoan-type Devil Fruit that enables the user to get the powers of the Sun God Nika and it gives the user a rubber like body. Its powers are limited by the user's imagination.",
-                img: "assets/img/gum.jpg"
+                img: "assets/img/gum.jpg",
+                user: [
+                    {
+                        name: "Monkey D. Luffy",
+                        bounty: "3,000,000,000 Berries",
+                        role: "Captain of the Straw Hat Pirates",
+                        img: "assets/img/luffy.jpg"
+                    }
+                ]
             },
             {
                 top: "top 2",
                 name: "Ope Ope no Mi",
                 desc: "A Paramecia-type Devil Fruit that grants the power to create a spherical domain, inside of which the user can freely rearrange, take apart, and 'surgically' remodel anything and anyone, including themself, making the user a Free Modification Human.",
-                img: "assets/img/control.jpg"
+                img: "assets/img/control.jpg",
+                user: [
+                    {
+                        name: "Trafalgar D. Water Law",
+                        bounty: "3,000,000,000 Berries",
+                        role: "Captain of the Heart Pirates",
+                        img: "assets/img/law.jpg"
+                    }
+                ]
             },
             {
                 top: "top 3",
                 name: "Tori Tori no Mi, Model: Phoenix",
                 desc: "A Mythical Zoan-type Devil Fruit that grants the power to transform into a phoenix and half-phoenix hybrid at will, as well as self-regenerate (and heal others) using blue phoenix flames.",
-                img: "assets/img/phoenix.jpg"
+                img: "assets/img/phoenix.jpg",
+                user: [
+                    {
+                        name: "Polo Marco",
+                        bounty: "1,374,000,000 Berries",
+                        role: "1st Division Commander of the Whitebeard Pirates",
+                        img: "assets/img/marco.jpg"
+                    }
+                ]
             },
             {
                 top: "top 4",
                 name: "Pika Pika no Mi",
                 desc: "A Logia-type Devil Fruit that allows the user to create, control, and transform into light at will, turning the user into a Light Human. It enables the user to move at the speed of light and transport themself by means of reflection.",
-                img: "assets/img/light.jpg"
+                img: "assets/img/light.jpg",
+                user: [
+                    {
+                        name: "Borsalino 'Kizaru'",
+                        role: "Admiral of the Marines",
+                        img: "assets/img/kizaru.jpg"
+                    }
+                ]
             },
             {
                 top: "top 5",
                 name: "Uo Uo no Mi, Model: Seiryu",
                 desc: "a Mythical Zoan-type Devil Fruit that allows its user to transform into a hybrid and full Azure Dragon at will. Belonging to the 'strongest class of Devil Fruit'.",
-                img: "assets/img/dragon.jpg"
+                img: "assets/img/dragon.jpg",
+                user: [
+                    {
+                        name: "Kaido",
+                        bounty: "4,611,100,000 Berries",
+                        role: "Captain of the Beasts Pirates",
+                        img: "assets/img/kaido.jpg"
+                    }
+                ]
             },
             {
                 top: "top 6",
                 name: "Yami Yami no Mi",
                 desc: "A Logia-type Devil Fruit that allows the user to create, control, and transform into darkness at will, making the user a Darkness Human.",
-                img: "assets/img/dark.jpg"
+                img: "assets/img/dark.jpg",
+                user: [
+                    {
+                        name: "Marshall D. Teach 'Blackbeard'",
+                        bounty: "3,996,000,000 Berries",
+                        role: "Captain of the Blackbeard Pirates",
+                        img: "assets/img/blackbeard.jpg"
+                    }
+                ]
             },
         ]
 
         var parent = document.getElementById("parent");
 
-        for (var i = 0; i < devilFruit.length; i++) {
-            parent.innerHTML += `
-            <div class="col-4 p-5">
-                <div class="card p-3 shadow" style="width: 100%; height: 100%;">
-                    <img src="${devilFruit[i].img}" style="object-fit: cover;">
-                    <div class="h4 card-title fw-bold p-3 mt-5">${devilFruit[i].name}</div>
-                    <div class="card-text p-3 my-2">
-                        ${devilFruit[i].desc}
-                    </div>
+        function fruitCard(i) {
+            const f = devilFruit[i];
+            return `
+            <div class="card p-3 shadow d-flex flex-column" style="width: 100%; height: 100%;">
+            <img src="${f.img}" class="fruit-img" style="object-fit: cover;">
+            <div class="h4 card-title fw-bold p-3 mt-5">${f.name}</div>
+            <div class="card-text p-3 my-2">${f.desc}</div>
+            <div class="p-3 mt-auto">
+                <button class="btn card-btn" onclick="showUser(${i})">View User</button>
+            </div>
+        </div>`;
+        }
+
+        function userCard(i) {
+            const u = devilFruit[i].user[0];
+            return `
+            <div class="card p-3 shadow d-flex flex-column" style="width: 100%; height: 100%;">
+                <img src="${u.img}" class="fruit-img" style="object-fit: cover;">
+                <div class="h4 card-title fw-bolder p-3 mt-5">${u.name}</div>
+                <div class="d-flex flex-wrap gap-2 px-3 mb-3">
+                <span class="badge badge-role p-2">${u.role}</span>
+                    ${u.bounty ? `<span class="badge badge-bounty p-2">Bounty: ${u.bounty}</span>` : ""}
+                </div>
+                <div class="p-2 mt-auto">
+                    <button class="btn card-btn" onclick="showFruit(${i})">Back</button>
                 </div>
             </div>`;
+        }
+
+        function showUser(i) { document.getElementById("col" + i).innerHTML = userCard(i); }
+        function showFruit(i) { document.getElementById("col" + i).innerHTML = fruitCard(i); }
+
+        for (var i = 0; i < devilFruit.length; i++) {
+            parent.innerHTML += `<div class="col-4 p-5" id="col${i}">${fruitCard(i)}</div>`;
         }
     </script>
 </body>
