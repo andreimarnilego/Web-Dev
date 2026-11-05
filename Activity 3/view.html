@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Activity 3</title>
+    <link rel="icon" href="../assets/img/Logo.svg" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-B/GM4XqrwHnWXNOWMbloTmrYXZg10cakYGmpfsR/bbzQ6JAJI4ihuyADKLnBgrCe" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .panel {
+            background: #111827;
+            border: 1px solid #374151;
+            border-radius: 24px;
+            color: white;
+            box-shadow: 0 0 60px color-mix(in srgb, var(--race-color, #244b78) 30%, transparent);
+        }
+
+        .card {
+            position: relative;
+            background: #111827;
+            border: 1px solid #374151;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.1s ease-out, box-shadow 0.2s;
+        }
+
+        .card-img-top {
+            display: block;
+            width: 100%;
+            height: 550px;
+            object-fit: contain;
+            opacity: 0;
+            transition: opacity 0.3s;
+            background: radial-gradient(circle,
+                    color-mix(in srgb, var(--race-color, #244b78) 80%, #172b45) 0%,
+                    #172b45 55%,
+                    #0b1424 100%);
+        }
+
+        .form-badge {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: var(--race-color);
+            color: #111827;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+            padding: 6px 16px;
+            border-radius: 50rem;
+        }
+
+        .stat {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #1f2937;
+            border-left: 4px solid var(--race-color);
+            border-radius: 12px;
+            padding: 12px 16px;
+        }
+
+        .stat small {
+            color: #9ca3af;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hint {
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(17, 24, 39, 0.85);
+            color: white;
+            font-size: 0.8rem;
+            padding: 6px 16px;
+            border-radius: 50rem;
+            white-space: nowrap;
+            display: none;
+        }
+
+        .back-btn {
+            background: #111827;
+            border: 1px solid #374151;
+            color: white;
+            border-radius: 50rem;
+            padding: 8px 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+        }
+
+        .back-btn:hover {
+            background: var(--race-color, #244b78);
+            border-color: var(--race-color, #244b78);
+            color: #111827;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container py-4">
+        <a href="index.html" id="backlink" class="btn back-btn mb-3">&laquo; Back to list</a>
+
+        <div class="panel p-5" id="panel" style="min-height: 600px;">
+            <div class="row align-items-center justify-content-center g-5">
+                <div class="col-5">
+                    <div class="card mx-5" id="card">
+                        <div class="form-badge" id="badge">Loading...</div>
+                        <img id="image" src="" class="card-img-top" alt="character">
+                        <div class="spinner-border text-light position-absolute top-50 start-50 translate-middle"
+                            id="loader"></div>
+                        <div class="hint" id="hint">Click to see transformations</div>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="h3 fw-bold" id="name"></div>
+                    <div class="h5 mb-4 fw-bold" style="color: var(--race-color);" id="race"></div>
+
+                    <div class="d-flex flex-column gap-3">
+                        <div class="stat"><small>Affiliation</small>
+                            <div class="h5 mb-0" id="affiliation"></div>
+                        </div>
+                        <div class="stat"><small>Ki</small>
+                            <div class="h5 mb-0" id="ki"></div>
+                        </div>
+                        <div class="stat"><small>Max Ki</small>
+                            <div class="h5 mb-0" id="maxKi"></div>
+                        </div>
+                        <div class="stat"><small>Transformations</small>
+                            <div class="h5 mb-0" id="transCount"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const raceColors = [
+            { race: "Saiyan", color: "#FFB52E" },
+            { race: "Human", color: "#4CAF50" },
+            { race: "Namekian", color: "#2ECC71" },
+            { race: "Majin", color: "#E879C5" },
+            { race: "Frieza Race", color: "#A78BFA" },
+            { race: "Android", color: "#38BDF8" },
+            { race: "Jiren Race", color: "#EF4444" },
+            { race: "God", color: "#FACC15" },
+            { race: "Angel", color: "#67E8F9" },
+            { race: "Evil", color: "#B91C1C" },
+            { race: "Nucleico", color: "#F97316" },
+            { race: "Unknown", color: "#9CA3AF" }
+        ];
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get('id');
+        var page = urlParams.get('page') || 1;
+
+        document.getElementById('backlink').href = 'index.html?page=' + page;
+
+        var elPanel = document.getElementById('panel');
+        var elcard = document.getElementById('card');
+        var elImage = document.getElementById('image');
+        var elBadge = document.getElementById('badge');
+        var elLoader = document.getElementById('loader');
+
+        elImage.onload = elImage.onerror = () => {
+            elLoader.style.display = 'none';
+            elImage.style.opacity = 1;
+        };
+
+        var c;
+        var forms = [];
+        var current = 0;
+
+        function showForm() {
+            var f = forms[current];
+            elLoader.style.display = 'block';
+            elImage.style.opacity = 0;
+            elImage.src = f.image;
+            elBadge.innerHTML = f.name;
+            document.getElementById('ki').innerHTML = f.ki || "Unknown";
+            document.getElementById('maxKi').innerHTML = current == 0 ? (c.maxKi || "Unknown") : "-";
+        }
+
+        const getCharacter = async () => {
+            var response = await fetch('https://dragonball-api.com/api/characters/' + id);
+            c = await response.json();
+
+            var raceColor = raceColors.find(item => item.race === c.race)?.color || "#244b78";
+            elPanel.style.setProperty('--race-color', raceColor);
+            document.body.style.setProperty('--race-color', raceColor);
+
+            var transformations = c.transformations || [];
+            forms = [{ name: "Base Form", image: c.image, ki: c.ki }].concat(transformations);
+            forms.forEach(f => new Image().src = f.image);
+
+            document.getElementById('name').innerHTML = c.name;
+            document.getElementById('race').innerHTML = c.race;
+            document.getElementById('affiliation').innerHTML = c.affiliation || "Unknown";
+            document.getElementById('transCount').innerHTML = transformations.length;
+
+            if (forms.length > 1) {
+                elcard.style.cursor = 'pointer';
+                document.getElementById('hint').style.display = 'block';
+                elcard.onclick = () => {
+                    current = (current + 1) % forms.length;
+                    showForm();
+                };
+            }
+            showForm();
+        }
+
+        if (id != null) {
+            getCharacter();
+        }
+    </script>
+    <script src="assets/js/script.js"></script>
+</body>
+
+</html>

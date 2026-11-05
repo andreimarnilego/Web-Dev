@@ -1,0 +1,30 @@
+body {
+    min-height: 100vh;
+    background-color: #0b1424;
+    background-image:
+        radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--race-color, #244b78) 35%, transparent), transparent 60%),
+        radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+    background-size: 100% 100%, 24px 24px;
+    background-attachment: fixed;
+}
+
+.card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+    background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%),
+            color-mix(in srgb, var(--race-color) 25%, transparent),
+            transparent 40%);
+}
+
+.card:hover::after {
+    opacity: 1;
+}
+
+.card:hover {
+    border-color: var(--race-color);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px color-mix(in srgb, var(--race-color) 40%, transparent);
+}
